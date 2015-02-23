@@ -1,0 +1,64 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="siteApp">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Node/Angular site</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="css/web-UI.css"><!-- load stylesheet -->
+
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL THE PROJECTS -->
+<body ng-controller="projectController">
+
+  <div class="project" ng-repeat="project in projects">
+    <h1>{{project.Title}}-</h1><small>posted - {{project.Posted}}</small>
+    <blockquote>{{project.Description}}</blockquote>
+    <button class="" ng-click="Edit(project._id)">Edit</button>
+    <button class="" ng-click="deleteProject(project._id)">Delete</button>
+    <div class="project-content">{{project.Content}}</div>
+    <div id="project-form" ng-show="project.isEdited">
+        <div>
+            <form ng-submit="modifyProject(project._id)">
+                <div>
+                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                    <input type="text" placeholder="Project Title" ng-model="project.Title">
+                    <input type="text" placeholder="Project Description" ng-model="project.Description">
+                    <input type="text" placeholder="Project Content" ng-model="project.Content">
+                </div>
+
+                <!-- createToDo() WILL CREATE NEW TODOS -->
+                <button type="submit">Modify</button>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div id="project-form">
+      <div>
+          <form ng-submit="createProject()">
+              <div>
+                  <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                  <input type="text" placeholder="Project Title" ng-model="formData.Title">
+                  <input type="text" placeholder="Project Description" ng-model="formData.Description">
+                  <input type="text" placeholder="Project Content" ng-model="formData.Content">
+              </div>
+
+              <!-- createToDo() WILL CREATE NEW TODOS -->
+              <button type="submit">Add</button>
+          </form>
+      </div>
+  </div>
+
+  <!-- SPELLS -->
+  <script src="js/angular.js"></script><!-- load angular -->
+  <script src="js/site.js"></script>
+</body>
+</html>
